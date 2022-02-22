@@ -1,2 +1,13 @@
-opa
-<%= @r %>
+<div class="next-race">
+  <p>Próxima corrida:</p>
+  <h1> Round <%= @next_race.round%> - <%= @next_race.name %></h1>
+
+  <div class="circuit-box">
+    <div>
+      <p><strong>Data: </strong><%= @next_race.date%></p>
+      <p><strong>Local: </strong><%= @next_race.local%> - <%= @next_race.country%></p>
+      <p><strong>Horário: </strong><%= @next_race.time%></p>
+    </div>
+    <%= image_tag "#{@next_race.id}.png", class: 'next-circuit' %>
+  </div>
+</div>

@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
-    def index
-        resp = Faraday.get('http://ergast.com/api/f1/2022.json')
-        @r = JSON.parse(resp.body)
-        
-    end
+  def index
+    @next_race = Circuit.next_race
+  end
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>F1Web</title>
+    <title>F1 Web</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,13 +11,27 @@
   </head>
 
   <body>
-  <nav class="<%= controller_name %>-<%= action_name %>">
-    <div style="display: flex; flex-direction: column;">
-      <%= render inline: Rails.root.join('app/assets/images/f1-white.svg').read %>
-      Web
-    </div>
-  
-  </nav>
-    <%= yield %>
+    <nav>
+      <div class="nav-main">
+
+        <a href="<%= root_path%>">
+          <div style="display: flex; flex-direction: column;">
+              <%= render inline: Rails.root.join('app/assets/images/f1-white.svg').read %>
+              Web
+          </div>
+        </a>
+
+        <div class="links">
+          <%= link_to 'Home', root_path, class: 'links'%>
+          <%= link_to 'Calendário', circuits_path, class: 'links'%>
+        </div>
+
+      </div>
+    </nav>
+
+    <main style="margin: 15px;">
+      <%= yield %>
+    </main>
+
   </body>
 </html>

@@ -12,7 +12,7 @@
  *
  */
 
-@import "bootstrap";
+
 
 @font-face {
     font-family: 'Formula1-Regular';
@@ -34,12 +34,102 @@
     src: url('Formula1-Wide.ttf');
 }
 
-// $f1red: #e10600;
 
-
-nav.home-index {
+nav {
     padding: 15px;
     color: #ffffff;
     font-family: 'Formula1-Wide';
     background-color: #e10600;
+    border-radius: 15px;
+
 }
+
+main {
+    font-family: 'Formula1-Regular';
+}
+
+.circuits-table {
+    padding: 5px;
+    border-collapse: collapse; 
+}
+
+.circuits-table td {
+    padding: 10px;
+}
+
+.tr-1 td {
+    background-color: #ebebeb;
+}
+
+.circuits-table th {
+    padding-bottom: 5px;
+    border-bottom: 5px solid #e10600;
+}
+
+.nav-main {
+    display: flex; 
+    flex-direction: row;
+ 
+}
+
+.nav-main a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.links {
+    padding-left: 15px;
+}
+
+.links a{
+    font-family: 'Formula1-Regular';
+
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+td a {
+    color: #e10600;
+    text-decoration: none;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+
+}
+
+.circuit {
+    max-width: 50%;
+    max-height: 50%;
+}
+
+.next-circuit {
+    max-width: 50%;
+    max-height: 50%;
+}
+
+.next-race p {
+    margin-bottom: 0px;
+}
+
+.next-race h1 {
+    margin-top: 0px;
+    display:inline-block; 
+    border-bottom: 5px solid #e10600;
+}
+.details {
+    max-width: 25%;
+}
+
+.details a {
+    color: #e10600;
+    text-decoration: none;
+}
+
+.circuit-box {
+    display:inline-flex; 
+
+}
+
