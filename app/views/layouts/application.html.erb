@@ -11,8 +11,12 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-dark bg-danger">
-  <p>Salve</p>
+  <nav class="<%= controller_name %>-<%= action_name %>">
+    <div style="display: flex; flex-direction: column;">
+      <%= render inline: Rails.root.join('app/assets/images/f1-white.svg').read %>
+      Web
+    </div>
+  
   </nav>
     <%= yield %>
   </body>

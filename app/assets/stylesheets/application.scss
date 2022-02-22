@@ -34,10 +34,12 @@
     src: url('Formula1-Wide.ttf');
 }
 
-$f1red: #e10600;
+// $f1red: #e10600;
 
 
-body {
+nav.home-index {
+    padding: 15px;
+    color: #ffffff;
     font-family: 'Formula1-Wide';
-    background-color: peru;
+    background-color: #e10600;
 }
