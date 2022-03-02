@@ -61,7 +61,7 @@ main {
     background-color: #ebebeb;
 }
 
-.circuits-table th, .standings-table th {
+.circuits-table th, .standings-table th{
     padding-bottom: 5px;
     border-bottom: 5px solid #e10600;
 }
@@ -145,3 +145,19 @@ th {
 
 }
 
+
+/* DRIVERS */
+
+.driver-box {
+    display: flex;
+}
+
+.logo {
+    width: 160px;
+    height: 90px;
+}
+
+.photo {
+    width: 400px;
+
+}

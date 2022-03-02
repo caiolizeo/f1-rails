@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   resources :circuits, only: [:index, :show]
   resources :standings, only: [:index]
+  resources :drivers, only: [:show]
+
 end
