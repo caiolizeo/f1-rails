@@ -48,12 +48,12 @@ main {
     font-family: 'Formula1-Regular';
 }
 
-.circuits-table {
+.circuits-table, .standings-table {
     padding: 5px;
     border-collapse: collapse; 
 }
 
-.circuits-table td {
+.circuits-table td, .standings-table td {
     padding: 10px;
 }
 
@@ -61,7 +61,7 @@ main {
     background-color: #ebebeb;
 }
 
-.circuits-table th {
+.circuits-table th, .standings-table th {
     padding-bottom: 5px;
     border-bottom: 5px solid #e10600;
 }
@@ -94,10 +94,22 @@ td a {
     text-decoration: none;
 }
 
+tbody {
+    font-size: 12px;
+}
+
+.tr-1 td, .tr-0 td  {
+    padding: 30px;
+
+}
+
+th {
+    padding: 25px;
+}
+
 .content {
     display: flex;
     align-items: center;
-
 }
 
 .circuit {

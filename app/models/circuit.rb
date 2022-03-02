@@ -18,20 +18,25 @@ class Circuit
     circuits = []
     resp = Faraday.get('http://ergast.com/api/f1/2022.json')
     if resp.status == 200
-      resp_circuits = JSON.parse(resp.body)['MRData']['RaceTable']['Races']
+      begin
+        resp_circuits = JSON.parse(resp.body)['MRData']['RaceTable']['Races']
 
-      resp_circuits.each do |c|
-        c_date = Date.parse(c['date']).strftime('%d/%m/%Y')
+        resp_circuits.each do |c|
+          c_date = Date.parse(c['date']).strftime('%d/%m/%Y')
 
-        time = convert_time(c['time'])
-        circuits << Circuit.new(id: c['Circuit']['circuitId'], round: c['round'], 
-                                name: c['raceName'], date: c_date, time: time,
-                                circuit: c['Circuit']['circuitName'], local: c['Circuit']['Location']['locality'],
-                                country: c['Circuit']['Location']['country'], lat_long: nil)
+          time = convert_time(c['time'])
+          circuits << Circuit.new(id: c['Circuit']['circuitId'], round: c['round'], 
+                                  name: c['raceName'], date: c_date, time: time,
+                                  circuit: c['Circuit']['circuitName'], local: c['Circuit']['Location']['locality'],
+                                  country: c['Circuit']['Location']['country'], lat_long: nil)
+        end
+        return circuits
+        
+      rescue
+        return nil
       end
     end
 
-    return circuits
   end
 
   def self.find(id)
