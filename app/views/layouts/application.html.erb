@@ -7,7 +7,6 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -25,11 +24,26 @@
           <%= link_to 'Home', root_path, class: 'links'%>
           <%= link_to 'Calendário', circuits_path, class: 'links'%>
           <%= link_to 'Campeonato de pilotos', standings_path, class: 'links'%>
+
         </div>
+          <% if user_signed_in? %>
+            <%= current_user.email %>
+          <% else %>
+            <%= link_to 'Entrar', new_user_session_path, class: 'links'%>
+          <% end %>
+
 
       </div>
     </nav>
-
+    
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    
     <main style="margin: 15px;">
       <%= yield %>
     </main>
