@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :standings, only: [:index]
   resources :drivers, only: [:show]
 
+  resources :bets, only: [:index, :create]
+
 end

@@ -27,7 +27,7 @@
 
           <% if user_signed_in? %>
             <div class=links><%= current_user.email %> - <%= button_to 'Sair', destroy_user_session_path, method: :delete %></div>
-
+            <%= link_to 'Apostar', bets_path, class: 'links' %>
           <% else %>
             <%= link_to 'Entrar', new_user_session_path, class: 'links'%>
           <% end %>
