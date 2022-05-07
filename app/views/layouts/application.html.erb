@@ -25,12 +25,13 @@
           <%= link_to 'Calendário', circuits_path, class: 'links'%>
           <%= link_to 'Campeonato de pilotos', standings_path, class: 'links'%>
 
-        </div>
           <% if user_signed_in? %>
-            <%= current_user.email %>
+            <div class=links><%= current_user.email %> - <%= button_to 'Sair', destroy_user_session_path, method: :delete %></div>
+
           <% else %>
             <%= link_to 'Entrar', new_user_session_path, class: 'links'%>
           <% end %>
+        </div>
 
 
       </div>

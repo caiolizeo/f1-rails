@@ -12,7 +12,9 @@ describe 'Usuário se cadastra' do
     fill_in 'Confirme sua senha', with: '123456'
     click_on 'Inscrever-se'
 
-    expect(current_path).to eq root_path 
+    expect(current_path).to eq root_path
+    expect(page).not_to have_content 'Entrar'
+
   end
 
   it 'senha com menos de 6 caracteres' do
