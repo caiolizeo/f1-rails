@@ -1,0 +1,2 @@
+class FormulaOneDriver < ApplicationRecord
+end

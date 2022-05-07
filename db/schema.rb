@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_06_220952) do
+ActiveRecord::Schema.define(version: 2022_05_07_005343) do
+
+  create_table "formula_one_drivers", force: :cascade do |t|
+    t.string "Name"
+    t.string "Country"
+    t.string "Team"
+    t.integer "Number"
+    t.integer "Position"
+    t.integer "points"
+    t.integer "year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
