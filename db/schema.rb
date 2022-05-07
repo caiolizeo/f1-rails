@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_07_005343) do
+ActiveRecord::Schema.define(version: 2022_05_07_064116) do
+
+  create_table "bets", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "circuit"
+    t.integer "year"
+    t.string "pole_position"
+    t.string "first"
+    t.string "second"
+    t.string "third"
+    t.string "fourth"
+    t.string "fifth"
+    t.string "sixth"
+    t.string "seventh"
+    t.string "eighth"
+    t.string "ninth"
+    t.string "tenth"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_bets_on_user_id"
+  end
 
   create_table "formula_one_drivers", force: :cascade do |t|
     t.string "Name"
@@ -22,6 +42,8 @@ ActiveRecord::Schema.define(version: 2022_05_07_005343) do
     t.integer "year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "photo_img"
+    t.string "number_img"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +58,5 @@ ActiveRecord::Schema.define(version: 2022_05_07_005343) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bets", "users"
 end

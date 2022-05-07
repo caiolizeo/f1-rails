@@ -7,5 +7,7 @@ FactoryBot.define do
     Position { 1 }
     points { 100 }
     year { 2022 }
+    number_img { 'hamilton_logo.png' }
+    photo_img { 'hamilton_photo.img' }
   end
 end
