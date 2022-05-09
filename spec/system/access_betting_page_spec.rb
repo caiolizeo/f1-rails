@@ -16,7 +16,7 @@ describe 'Usuário acessa página de apostas' do
       expect(page).to have_field "#{i}ª posição"
     end
 
-    expect(page).to have_field 'Apostar'
+    expect(page).to have_button 'Apostar'
   end
 
   it 'Não está logado'

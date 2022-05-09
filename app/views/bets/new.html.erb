@@ -1,0 +1,58 @@
+<%= form_with(model: @bet) do |f| %>
+  <div>
+    <%= f.label :pole_position, 'Pole position' %>
+    <%= f.text_field :pole_position %>
+  </div>
+
+  <div>
+    <%= f.label :first, '1ª posição' %>
+    <%= f.text_field :first %>
+  </div>
+  
+  <div>
+    <%= f.label :second, '2ª posição' %>
+    <%= f.text_field :second %>
+  </div>
+
+  <div>
+    <%= f.label :third, '3ª posição' %>
+    <%= f.text_field :third %>
+  </div>
+
+  <div>
+    <%= f.label :fourth, '4ª posição' %>
+    <%= f.text_field :fourth %>
+  </div>
+  
+  <div>
+    <%= f.label :fifth, '5ª posição' %>
+    <%= f.text_field :fifth %>
+  </div>
+
+  <div>
+    <%= f.label :sixth, '6ª posição' %>
+    <%= f.text_field :sixth %>
+  </div>
+
+  <div>
+    <%= f.label :seventh, '7ª posição' %>
+    <%= f.text_field :seventh %>
+  </div>
+
+  <div>
+    <%= f.label :eighth, '8ª posição' %>
+    <%= f.text_field :eighth %>
+  </div>
+
+  <div>
+    <%= f.label :ninth, '9ª posição' %>
+    <%= f.text_field :ninth %>
+  </div>
+
+  <div>
+    <%= f.label :tenth, '10ª posição' %>
+    <%= f.text_field :tenth %>
+  </div>
+
+  <%= f.submit 'Apostar' %>
+<% end %>
