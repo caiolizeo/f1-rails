@@ -1,58 +1,67 @@
 <%= form_with(model: @bet) do |f| %>
+
+  <h3>Próxima corrida: <%= @next_race.circuit %></h3>
+
+  <%= f.hidden_field :circuit, value: @next_race.id %>
+  <%= f.hidden_field :year, value: @year %>
+  <%= f.hidden_field :user_id, value: @user %>
+
   <div>
     <%= f.label :pole_position, 'Pole position' %>
-    <%= f.text_field :pole_position %>
+    <%= f.collection_select(:pole_position, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
   <div>
     <%= f.label :first, '1ª posição' %>
-    <%= f.text_field :first %>
+    <%= f.collection_select(:first, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
   
   <div>
     <%= f.label :second, '2ª posição' %>
-    <%= f.text_field :second %>
+    <%= f.collection_select(:second, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
   <div>
     <%= f.label :third, '3ª posição' %>
-    <%= f.text_field :third %>
+    <%= f.collection_select(:third, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
   <div>
     <%= f.label :fourth, '4ª posição' %>
-    <%= f.text_field :fourth %>
+    <%= f.collection_select(:fourth, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
   
   <div>
     <%= f.label :fifth, '5ª posição' %>
-    <%= f.text_field :fifth %>
+    <%= f.collection_select(:fifth, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
   <div>
     <%= f.label :sixth, '6ª posição' %>
-    <%= f.text_field :sixth %>
+    <%= f.collection_select(:sixth, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
   <div>
     <%= f.label :seventh, '7ª posição' %>
-    <%= f.text_field :seventh %>
+    <%= f.collection_select(:seventh, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
   <div>
     <%= f.label :eighth, '8ª posição' %>
-    <%= f.text_field :eighth %>
+    <%= f.collection_select(:eighth, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
   <div>
     <%= f.label :ninth, '9ª posição' %>
-    <%= f.text_field :ninth %>
+    <%= f.collection_select(:ninth, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
   <div>
     <%= f.label :tenth, '10ª posição' %>
-    <%= f.text_field :tenth %>
+    <%= f.collection_select(:tenth, FormulaOneDriver.where("year = '2022'"), :code, :name, include_blank: true) %>
   </div>
 
-  <%= f.submit 'Apostar' %>
+  <div id="bet-btn">
+    <%= f.submit 'Apostar' %>
+  </div>
 <% end %>

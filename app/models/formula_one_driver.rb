@@ -1,6 +1,8 @@
 class FormulaOneDriver < ApplicationRecord
 
   def self.update
+
+    puts ' '
     puts '===================================='
     puts '=== ATUALIZANDO LISTA DE PILOTOS ==='
     puts '===================================='
@@ -36,13 +38,16 @@ class FormulaOneDriver < ApplicationRecord
         puts '====================================================='
         puts '=== HOUVE UM ERRO AO ATUALIZAR A LISTA DE PILOTOS ==='
         puts '====================================================='
+        puts ' '
+
 
       end
       puts ' '
       puts '==============================='
       puts "=== PILOTOS ATUALIZADOS: #{count} ==="
       puts '==============================='
-    
+      puts ' '
+
     end
 
   end
