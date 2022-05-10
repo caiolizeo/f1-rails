@@ -38,11 +38,16 @@ class BetsController < ApplicationController
     @bet = Bet.find(params[:id])
     @pole = FormulaOneDriver.find_by(code: @bet.pole_position, year: @bet.year)
     codes = [@bet.first, @bet.second,  @bet.third, @bet.fourth, @bet.fifth, @bet.sixth, @bet.seventh, @bet.eighth, @bet.ninth, @bet.tenth]
-    @drivers = []
+    @last_drivers = []
 
     codes.each do |code|
       driver = FormulaOneDriver.find_by(code: code, year: @bet.year)
-      @drivers << driver
+      @last_drivers << driver
+    end
+
+    @first_drivers = @last_drivers.take(3)
+    3.times do
+      @last_drivers.delete_at(0)
     end
 
   end

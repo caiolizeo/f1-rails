@@ -1,4 +1,4 @@
-  <h1>Resumo da Aposta</h1>
+<h1>Resumo da Aposta</h1>
 <div style="display: flex;">
   <div style="background-color: grey;">
     <h2>Pole position</h2>
@@ -10,14 +10,26 @@
 
   <div style="background-color: pink;">
     <h2>Corrida</h2>
+    <div style="display: flex;">
+      <% @first_drivers.each_with_index do |driver, position| %>
+        <div>
+          <%= position + 1 %><%= driver.name %>
+
+          <div style="display: flex;">
+            <%= image_tag "drivers/#{driver.logo_img}", class: 'mini-logo' %>
+            <%= image_tag "drivers/#{driver.photo_img}", class: 'mini-photo' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
     <table>
       <tbody>
-        
-        <% @drivers.each_with_index do |driver, position| %>
+
+        <% @last_drivers.each_with_index do |driver, position| %>
           <tr>
-            <td><%= position + 1 %></td>
+            <td><%= position + 4 %></td>
             <td><%= image_tag "drivers/#{driver.logo_img}", class: 'mini-logo' %> <%= driver.name%></td>
-            
           </tr>
         <% end %>
       
