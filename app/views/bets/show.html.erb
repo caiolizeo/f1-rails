@@ -1,0 +1,29 @@
+  Resumo da Aposta
+<div style="display: flex;">
+  <div style="background-color: grey;">
+    <h1>Pole position</h1>
+
+    <%= @pole.name %>
+    <%= image_tag "drivers/#{@pole.logo_img}", class: 'logo' %>
+    <%= image_tag "drivers/#{@pole.photo_img}", class: 'photo' %>
+  </div>
+
+  <div style="background-color: pink;">
+    <h2>Aposta</h2>
+    <table>
+      <tbody>
+        
+        <% @drivers.each_with_index do |driver, position| %>
+          <tr>
+            <td><%= position + 1 %></td>
+            <td><%= image_tag "drivers/#{driver.logo_img}", class: 'mini-logo' %> <%= driver.name%></td>
+            
+          </tr>
+        <% end %>
+      
+      </tbody>
+    </table>  
+  </div>
+
+
+</div>

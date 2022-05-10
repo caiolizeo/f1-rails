@@ -18,7 +18,7 @@ class Bet < ApplicationRecord
    
 
     driver_codes.each do |code|
-      driver = FormulaOneDriver.find_by(code: code)
+      driver = FormulaOneDriver.find_by(code: code, year: Circuit.next_race.date.last(4))
       errors.add(:base, "Um ou mais pilotos inválidos!") if driver == nil
     end
   end

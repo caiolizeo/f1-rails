@@ -33,5 +33,14 @@ class BetsController < ApplicationController
 
   def show
     @bet = Bet.find(params[:id])
+    @pole = FormulaOneDriver.find_by(code: @bet.pole_position, year: @bet.year)
+    codes = [@bet.first, @bet.second,  @bet.third, @bet.fourth, @bet.fifth, @bet.sixth, @bet.seventh, @bet.eighth, @bet.ninth, @bet.tenth]
+    @drivers = []
+
+    codes.each do |code|
+      driver = FormulaOneDriver.find_by(code: code, year: @bet.year)
+      @drivers << driver
+    end
+
   end
 end
