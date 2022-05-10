@@ -2,9 +2,16 @@
 
   <h3>Próxima corrida: <%= @next_race.circuit %></h3>
 
+  <% unless @errors.nil? %>
+    <ul>
+      <% @errors.each do |msg| %>
+        <li><%=msg%></li>
+      <%end%>
+    </ul>
+  <% end %>
+
   <%= f.hidden_field :circuit, value: @next_race.id %>
   <%= f.hidden_field :year, value: @year %>
-  <%= f.hidden_field :user_id, value: @user %>
 
   <div>
     <%= f.label :pole_position, 'Pole position' %>

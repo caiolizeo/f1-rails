@@ -16,7 +16,7 @@ class Circuit
 
   def self.all
     circuits = []
-    resp = Faraday.get('http://ergast.com/api/f1/2022.json')
+    resp = Faraday.get('http://ergast.com/api/f1/current.json')
     if resp.status == 200
       begin
         resp_circuits = JSON.parse(resp.body)['MRData']['RaceTable']['Races']
@@ -58,7 +58,7 @@ class Circuit
   end
 
   def self.next_race
-    resp = Faraday.get('http://ergast.com/api/f1/2022/next.json')
+    resp = Faraday.get('http://ergast.com/api/f1/current/next.json')
     c = JSON.parse(resp.body)['MRData']['RaceTable']['Races'][0]
     if resp.status == 200
       c_date = Date.parse(c['date']).strftime('%d/%m/%Y')
