@@ -164,13 +164,36 @@ th {
 
 
 /* BET SHOW */
+.race-container {
+/*    border-left: 5px solid #000000;
+*/
+    margin-left: 35px;
+}
+
+.pole-container {
+
+}
+
+.first-drivers {
+    margin-right: 35px;
+    border-right: 2px solid #000000;
+    border-top-right-radius: 10px;
+    border-top: 2px solid #000000;
+
+
+}
 
 .mini-logo {
     width: 53.5px;
     height: 30px;
 }
 
-
 .mini-photo {
     width: 120px;
+}
+
+.number {
+    margin: 0px;
+    font-size: 3.5rem;
+    font-weight: bolder;
 }

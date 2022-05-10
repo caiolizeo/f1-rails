@@ -1,24 +1,33 @@
 <h1>Resumo da Aposta</h1>
 <div style="display: flex;">
-  <div style="background-color: grey;">
-    <h2>Pole position</h2>
 
-    <%= @pole.name %>
-    <%= image_tag "drivers/#{@pole.logo_img}", class: 'logo' %>
-    <%= image_tag "drivers/#{@pole.photo_img}", class: 'photo' %>
+  <div class="pole-container">
+
+    <h2>Pole position</h2>
+    <h3><%= @pole.name %></h3>
+
+    <div style="display: flex;">
+      <%= image_tag "drivers/#{@pole.logo_img}", class: 'logo' %>
+      <%= image_tag "drivers/#{@pole.photo_img}", class: 'photo' %>
+    </div>
+
   </div>
 
-  <div style="background-color: pink;">
+  <div class="race-container">
     <h2>Corrida</h2>
     <div style="display: flex;">
       <% @first_drivers.each_with_index do |driver, position| %>
-        <div>
-          <%= position + 1 %><%= driver.name %>
+        <div class="first-drivers">
 
           <div style="display: flex;">
             <%= image_tag "drivers/#{driver.logo_img}", class: 'mini-logo' %>
             <%= image_tag "drivers/#{driver.photo_img}", class: 'mini-photo' %>
           </div>
+
+          <div style="display: flex;">
+            <p class="number"><%= position + 1 %></p> <p><%= driver.name %></p>
+          </div>
+              
         </div>
       <% end %>
     </div>

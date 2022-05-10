@@ -15,19 +15,21 @@ class FormulaOneDriver < ApplicationRecord
       begin
 
         drivers = JSON.parse(resp.body)['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
-        season = JSON.parse(resp.body)['MRData']['StandingsTable']['StandingsLists'][0]['season'].to_i
+        season = JSON.parse(resp.body)['MRData']['StandingsTable']['StandingsLists'][0]['season']
 
         drivers.each do |driver|
           newDriver = FormulaOneDriver.new
 
-          newDriver.name = "#{driver['Driver']['givenName']} #{driver['Driver']['familyName']}"
+          newDriver.name = driver['Driver']['givenName']
+          newDriver.last_name = driver['Driver']['familyName']
+          newDriver.full_name = "#{driver['Driver']['givenName']} #{driver['Driver']['familyName']}"
           newDriver.code = driver['Driver']['code']
           newDriver.country = driver['Driver']['nationality']
           newDriver.team = driver['Constructors'][0]['name']
           newDriver.number = driver['Driver']['permanentNumber']
           newDriver.year = season
-          newDriver.photo_img = "2022/#{driver['Driver']['driverId']}_photo.png"
-          newDriver.logo_img = "2022/#{driver['Driver']['driverId']}_logo.png"
+          newDriver.photo_img = "#{season}/#{driver['Driver']['driverId']}_photo.png"
+          newDriver.logo_img = "#{season}/#{driver['Driver']['driverId']}_logo.png"
           
           newDriver.save if FormulaOneDriver.where("year = '#{newDriver.year}' and code = '#{newDriver.code}'").empty?
           count+=1 if newDriver.persisted?
