@@ -1,5 +1,8 @@
 class BetsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :duplicated_bet, only: [:new, :create]
+  before_action :private_bet, only: [:show]
+
 
   def index
 
@@ -42,5 +45,16 @@ class BetsController < ApplicationController
       @drivers << driver
     end
 
+  end
+
+  private
+  def duplicated_bet
+    bet = Bet.find_by(user: current_user, year: Circuit.next_race.date.last(4), circuit: Circuit.next_race.id)
+    redirect_to bet if bet != nil
+  end
+
+  def private_bet
+    bet = Bet.find(params[:id])
+    redirect_to root_path if current_user != bet.user
   end
 end

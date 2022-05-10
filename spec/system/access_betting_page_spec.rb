@@ -68,4 +68,20 @@ describe 'Usuário faz apostas' do
     expect(current_path).to eq bet_path(bet)
   end
 
+  it 'e tenta acessar a aposta de outro usuário' do
+    user1 = create(:user)
+    user2 = create(:user, email: 'email2@email.com')
+
+    for i in 1..10 do
+      create(:formula_one_driver, :"fdriver#{i}")
+    end
+    bet1 = create(:bet, user: user1)
+    bet2 = create(:bet, user: user2)
+
+
+    login_as(user1)   
+    visit bet_path(bet2)
+
+    expect(current_path).to eq root_path
+  end
 end

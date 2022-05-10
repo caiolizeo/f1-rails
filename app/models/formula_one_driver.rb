@@ -26,8 +26,8 @@ class FormulaOneDriver < ApplicationRecord
           newDriver.team = driver['Constructors'][0]['name']
           newDriver.number = driver['Driver']['permanentNumber']
           newDriver.year = season
-          newDriver.photo_img = "#{driver['Driver']['driverId']}_photo.png"
-          newDriver.logo_img = "#{driver['Driver']['driverId']}_logo.png"
+          newDriver.photo_img = "2022/#{driver['Driver']['driverId']}_photo.png"
+          newDriver.logo_img = "2022/#{driver['Driver']['driverId']}_logo.png"
           
           newDriver.save if FormulaOneDriver.where("year = '#{newDriver.year}' and code = '#{newDriver.code}'").empty?
           count+=1 if newDriver.persisted?
