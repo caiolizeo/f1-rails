@@ -27,7 +27,10 @@ describe 'Usuário faz apostas' do
 
   it 'e faz uma aposta' do
     user = create(:user)
-    FormulaOneDriver.update
+
+    for i in 1..10 do
+      create(:formula_one_driver, :"fdriver#{i}")
+    end
 
     login_as(user)   
     visit root_path
@@ -43,11 +46,26 @@ describe 'Usuário faz apostas' do
     select 'Valtteri Bottas', from: '7ª posição'
     select 'Esteban Ocon', from: '8ª posição'
     select 'Kevin Magnussen', from: '9ª posição'
-    select 'Daniel Ricciardo', from: '10ª posição'
+    select 'Max Verstappen', from: '10ª posição'
     within('div#bet-btn') do
       click_on 'Apostar'
     end
 
     expect(page).to have_content 'Aposta realizada com sucesso'
   end
+
+  it 'e tenta fazer uma segunda aposta mas nao consegue' do
+    user = create(:user)
+    for i in 1..10 do
+      create(:formula_one_driver, :"fdriver#{i}")
+    end
+    bet = create(:bet, user: user)
+
+    login_as(user)   
+    visit root_path
+    click_on 'Apostar'
+
+    expect(current_path).to eq bet_path(bet)
+  end
+
 end

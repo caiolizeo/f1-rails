@@ -21,7 +21,7 @@ class BetsController < ApplicationController
     b.circuit = Circuit.next_race.id    
     
     if b.save
-    redirect_to b, notice: 'Aposta cadastrada com sucesso' 
+    redirect_to b, notice: 'Aposta realizada com sucesso' 
     else
       @next_race = Circuit.next_race
       @errors = b.errors.full_messages
