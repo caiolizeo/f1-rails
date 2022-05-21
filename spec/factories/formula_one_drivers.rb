@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :formula_one_driver do
     trait :fdriver1 do
-      name { "Charles Leclerc" }
+      name { "Charles" }
+      last_name { "Leclerc" }
+      full_name { "Charles Leclerc" }
       country { "Monegasque" }
       team { "Ferrari" }
       number { 16 }
@@ -12,7 +14,9 @@ FactoryBot.define do
     end
 
     trait :fdriver2 do
-      name { "Lewis Hamilton" }
+      name { "Lewis" }
+      last_name { "Hamilton" }
+      full_name { "Lewis Hamilton" }
       country { "Great Britain" }
       team { "Mercedes" }
       number { 44 }
@@ -23,7 +27,9 @@ FactoryBot.define do
     end
 
     trait :fdriver3 do
-      name { "Max Verstappen" }
+      name { "Max" }
+      last_name { "Verstappen" }
+      full_name { "Max Verstappen" }
       country { "Dutch" }
       team { "Red Bull" }
       number { 33 }
@@ -34,7 +40,9 @@ FactoryBot.define do
     end
 
     trait :fdriver4 do
-      name { "Sergio Pérez" }
+      name { "Sergio" }
+      last_name { "Pérez" }
+      full_name { "Sergio Pérez" }
       country { "Mexican" }
       team { "Red Bull" }
       number { 11 }
@@ -45,7 +53,9 @@ FactoryBot.define do
     end
 
     trait :fdriver5 do
-      name { "George Russell" }
+      name { "George" }
+      last_name { "Russell" }
+      full_name { "George Russell" }
       country { "Great Britain" }
       team { "Mercedes" }
       number { 63 }
@@ -56,7 +66,9 @@ FactoryBot.define do
     end
 
     trait :fdriver6 do
-      name { "Carlos Sainz" }
+      name { "Carlos" }
+      last_name { "Sainz" }
+      full_name { "Carlos Sainz" }
       country { "Spanish" }
       team { "Ferrari" }
       number { 55 }
@@ -67,7 +79,9 @@ FactoryBot.define do
     end
 
     trait :fdriver7 do
-      name { "Lando Norris" }
+      name { "Lando" }
+      last_name { "Norris" }
+      full_name { "Lando Norris" }
       country { "Great Britain" }
       team { "McLaren" }
       number { 4 }
@@ -78,7 +92,9 @@ FactoryBot.define do
     end
 
     trait :fdriver8 do
-      name { "Valtteri Bottas" }
+      name { "Valtteri" }
+      last_name { "Bottas" }
+      full_name { "Valtteri Bottas" }
       country { "Finnish" }
       team { "Alfa Romeo" }
       number { 77 }
@@ -89,7 +105,9 @@ FactoryBot.define do
     end
 
     trait :fdriver9 do
-      name { "Esteban Ocon" }
+      name { "Esteban" }
+      last_name { "Ocon" }
+      full_name { "Esteban Ocon" }
       country { "French" }
       team { "Alpine" }
       number { 31 }
@@ -100,7 +118,9 @@ FactoryBot.define do
     end
 
     trait :fdriver10 do
-      name { "Kevin Magnussen" }
+      name { "Kevin" }
+      last_name { "Magnussen" }
+      full_name { "Kevin Magnussen" }
       country { "Danish" }
       team { "Haas" }
       number { 20 }

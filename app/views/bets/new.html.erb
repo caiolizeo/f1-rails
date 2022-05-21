@@ -10,9 +10,6 @@
     </ul>
   <% end %>
 
-  <%= f.hidden_field :circuit, value: @next_race.id %>
-  <%= f.hidden_field :year, value: @year %>
-
   <div>
     <%= f.label :pole_position, 'Pole position' %>
     <%= f.collection_select(:pole_position, FormulaOneDriver.where("year = '2022'"), :code, :full_name, include_blank: true) %>
