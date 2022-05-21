@@ -1,8 +1,38 @@
 class Bet < ApplicationRecord
   belongs_to :user
-
-
   validate :verify_bet
+
+
+  def self.update_all
+    resp = Faraday.get('http://ergast.com/api/f1/current/last/results.json')
+    resp_result = JSON.parse(resp.body)['MRData']['RaceTable']['Races'][0]['Results']
+    circuit_id = JSON.parse(resp.body)['MRData']['RaceTable']['Circuit']['circuitId']
+    circuit_season = JSON.parse(resp.body)['MRData']['RaceTable']['season']
+
+    bets = Bet.where("year = '#{circuit_season}' and circuit = '#{circuit_id}' and validated = false")
+
+    return nil if bets.empty?
+
+    # criar logica de pontuação
+    # ===============================
+    # pole: 20pts
+
+    # Pontos por piloto
+    # acertou a posição piloto: 20pts
+    # 1 posição acima/abaixo: 18pts
+    # 2 posições acima/abaixo: 16pts
+    # 3 posições acima/abaixo: 14pts
+    # 4 posições acima/abaixo: 12pts
+    # 5 posições acima/abaixo: 10pts
+    # 6 posições acima/abaixo: 8pts
+    # 7 posições acima/abaixo: 6pts
+    # 8 posições acima/abaixo: 4pts
+    # 9 posições acima/abaixo: 2pts
+    # 10 posições acima/abaixo: 1pt
+    # 11 posições ou mais: 0pts
+    # ===============================
+
+  end
 
   private
 

@@ -13,6 +13,7 @@ class BetsController < ApplicationController
     @next_race = Circuit.next_race
     @year = @next_race.date.last(4)
     @user = current_user.id
+    @drivers = FormulaOneDriver.where("year = '#{@year}'")
   end
   
   def create
