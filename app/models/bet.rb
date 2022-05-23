@@ -1,16 +1,21 @@
 class Bet < ApplicationRecord
   belongs_to :user
-  validate :verify_bet
-
+  before_create :verify_bet
+  enum validated: { validated: true, invalidated: false }
 
   def self.update_all
     resp = Faraday.get('http://ergast.com/api/f1/current/last/results.json')
     circuit_id = JSON.parse(resp.body)['MRData']['RaceTable']['Races'][0]['Circuit']['circuitId']
     circuit_season = JSON.parse(resp.body)['MRData']['RaceTable']['season']
-    bets = Bet.where("year = '#{circuit_season}' and circuit = '#{circuit_id}' and validated = false")
+    bets = Bet.where(year: circuit_season, circuit: circuit_id, validated: 'invalidated')
+
+    puts '=== NENHUMA APOSTA PARA ATUALIZAR ===' if bets.empty?
     return nil if bets.empty?
     
-    dvr = FormulaOneDriver.where("year = '#{circuit_season}'")
+    q_resp = Faraday.get('http://ergast.com/api/f1/current/last/qualifying.json')
+    pole = JSON.parse(q_resp.body)['MRData']['RaceTable']['Races'][0]['QualifyingResults'][0]['Driver']['code']
+
+    dvr = FormulaOneDriver.where(year: circuit_season)
     drivers = {}
 
     dvr.each do |d|
@@ -32,45 +37,49 @@ class Bet < ApplicationRecord
     puts ' '
 
     bets.each do |bet|
+      puts "=== VALIDANDO APOSTA ID: #{bet.id} ==="
       points = 0
-      points += (1 - drivers[bet.first].to_i).abs
-      points += (2 - drivers[bet.second].to_i).abs
-      points += (3 - drivers[bet.third].to_i).abs
-      points += (4 - drivers[bet.fourth].to_i).abs
-      points += (5 - drivers[bet.fifth].to_i).abs
-      points += (6 - drivers[bet.sixth].to_i).abs
-      points += (7 - drivers[bet.seventh].to_i).abs
-      points += (8 - drivers[bet.eighth].to_i).abs
-      points += (9 - drivers[bet.ninth].to_i).abs
-      points += (10 - drivers[bet.tenth].to_i).abs
 
-      puts points
+      points += 20 if pole == bet.pole_position
+
+      points += calculate_points((1 - drivers[bet.first].to_i).abs)
+      points += calculate_points((2 - drivers[bet.second].to_i).abs)
+      points += calculate_points((3 - drivers[bet.third].to_i).abs)
+      points += calculate_points((4 - drivers[bet.fourth].to_i).abs)
+      points += calculate_points((5 - drivers[bet.fifth].to_i).abs)
+      points += calculate_points((6 - drivers[bet.sixth].to_i).abs)
+      points += calculate_points((7 - drivers[bet.seventh].to_i).abs)
+      points += calculate_points((8 - drivers[bet.eighth].to_i).abs)
+      points += calculate_points((9 - drivers[bet.ninth].to_i).abs)
+      points += calculate_points((10 - drivers[bet.tenth].to_i).abs)
+
+      bet.result_points = points 
+      bet.validated!
+      bet.save
     end
-    # criar logica de pontuação
-    # ===============================
-    # pole: 20pts
-
-    # Pontos por piloto
-    # acertou a posição piloto: 20pts
-    # 1 posição acima/abaixo: 18pts
-    # 2 posições acima/abaixo: 16pts
-    # 3 posições acima/abaixo: 14pts
-    # 4 posições acima/abaixo: 12pts
-    # 5 posições acima/abaixo: 10pts
-    # 6 posições acima/abaixo: 8pts
-    # 7 posições acima/abaixo: 6pts
-    # 8 posições acima/abaixo: 4pts
-    # 9 posições acima/abaixo: 2pts
-    # 10 posições acima/abaixo: 1pt
-    # 11 posições ou mais: 0pts
-    # ===============================
-
+    
+    return nil
   end
-
+  
+  def self.calculate_points(position)
+    return 20 if position == 0
+    return 18 if position == 1
+    return 16 if position == 2
+    return 14 if position == 3
+    return 12 if position == 4
+    return 10 if position == 5
+    return 8 if position == 6
+    return 6 if position == 7
+    return 4 if position == 8
+    return 2 if position == 9
+    return 1 if position == 10
+    return 0
+  end
+  
   private
 
   def verify_bet
-    duplicated_bet = Bet.where("user_id = '#{self.user_id}' and circuit ='#{self.circuit}' and year ='#{self.year}'")
+    duplicated_bet = Bet.where(user_id: self.user_id, circuit: self.circuit, year: self.year)
     
     errors.add(:base, 'Você não pode fazer outra aposta para essa corrida!') unless duplicated_bet.empty?
     
@@ -85,5 +94,6 @@ class Bet < ApplicationRecord
       errors.add(:base, "Um ou mais pilotos inválidos!") if driver == nil
     end
   end
+
 
 end
