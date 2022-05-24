@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :drivers, only: [:show]
 
   resources :bets, only: [:index, :new, :create, :show]
-
+  resources :profile, only: [:index]
 end

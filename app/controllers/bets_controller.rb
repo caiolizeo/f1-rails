@@ -20,7 +20,7 @@ class BetsController < ApplicationController
     bet_params = params.require(:bet).permit(:pole_position, :first, :second, :third, :fourth, :fifth, :sixth, :seventh, :eighth, :ninth, :tenth)
     
     b = Bet.new(bet_params)
-    b.user_id = current_user.id
+    b.user = current_user
     b.year = Circuit.next_race.date.last(4)
     b.circuit = Circuit.next_race.id    
     
