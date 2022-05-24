@@ -1,0 +1,9 @@
+<h1>Minhas apostas</h1>
+<% @user.bets.each do |bet| %>
+  <% if bet.validated? %>
+    <%= link_to bet.circuit, bet %> - <%= bet.result_points %> pontos
+  <% else %>
+    <%= link_to bet.circuit, bet %> - aguardando resultados
+  <% end %>
+  <br>
+<% end %>

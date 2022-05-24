@@ -1,4 +1,4 @@
-<h1>Resumo da Aposta</h1>
+<h1>Resumo da Aposta - <%= @bet.circuit %></h1>
 <div style="display: flex;">
 
   <div class="pole-container">
@@ -43,7 +43,12 @@
         <% end %>
       
       </tbody>
-    </table>  
+    </table> 
+    <% if @bet.validated? %>
+      <h3>Resultado da aposta: <%= @bet.result_points %> pontos</h3>
+    <% else %>
+      <h3>O resultado da aposta estará disponível após a corrida!
+    <% end %>
   </div>
 
 

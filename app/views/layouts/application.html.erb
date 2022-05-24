@@ -26,7 +26,7 @@
           <%= link_to 'Campeonato de pilotos', standings_path, class: 'links'%>
 
           <% if user_signed_in? %>
-            <div class=links><%= current_user.email %> - <%= button_to 'Sair', destroy_user_session_path, method: :delete %></div>
+            <%=link_to current_user.email, profile_index_path, class: 'links' %> - <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
             <%= link_to 'Apostar', new_bet_path, class: 'links' %>
           <% else %>
             <%= link_to 'Entrar', new_user_session_path, class: 'links'%>

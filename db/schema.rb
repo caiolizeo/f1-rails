@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_154256) do
+ActiveRecord::Schema.define(version: 2022_05_24_162054) do
 
   create_table "bets", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 2022_05_24_154256) do
     t.integer "result_points"
     t.boolean "validated", default: false, null: false
     t.index ["user_id"], name: "index_bets_on_user_id"
+  end
+
+  create_table "formula_one_circuits", force: :cascade do |t|
+    t.string "name"
+    t.string "country"
+    t.date "date"
+    t.string "code"
+    t.string "latitude"
+    t.string "longitude"
+    t.string "local"
+    t.integer "round"
+    t.string "time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "formula_one_drivers", force: :cascade do |t|
