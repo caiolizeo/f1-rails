@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_202217) do
+ActiveRecord::Schema.define(version: 2022_05_24_210345) do
 
   create_table "bets", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -37,13 +37,11 @@ ActiveRecord::Schema.define(version: 2022_05_24_202217) do
   create_table "formula_one_circuits", force: :cascade do |t|
     t.string "name"
     t.string "country"
-    t.date "date"
     t.string "code"
     t.string "latitude"
     t.string "longitude"
     t.string "local"
     t.integer "round"
-    t.string "time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "photo_path"
@@ -52,6 +50,8 @@ ActiveRecord::Schema.define(version: 2022_05_24_202217) do
     t.datetime "fp3"
     t.datetime "qualifying"
     t.datetime "sprint"
+    t.integer "year"
+    t.datetime "race_date"
   end
 
   create_table "formula_one_drivers", force: :cascade do |t|

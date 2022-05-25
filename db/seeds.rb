@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(email: 'email@email.com', password: '123456')
 FormulaOneDriver.update
+FormulaOneCircuit.update

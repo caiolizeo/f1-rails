@@ -18,6 +18,7 @@ class FormulaOneDriver < ApplicationRecord
         season = JSON.parse(resp.body)['MRData']['StandingsTable']['StandingsLists'][0]['season']
 
         drivers.each do |driver|
+          next unless FormulaOneDriver.where(year: season, code: driver['Driver']['code']).empty?
           newDriver = FormulaOneDriver.new
 
           newDriver.name = driver['Driver']['givenName']
@@ -31,8 +32,8 @@ class FormulaOneDriver < ApplicationRecord
           newDriver.photo_img = "#{season}/#{driver['Driver']['driverId']}_photo.png"
           newDriver.logo_img = "#{season}/#{driver['Driver']['driverId']}_logo.png"
           
-          newDriver.save if FormulaOneDriver.where(year: newDriver.year, code: newDriver.code).empty?
-          count+=1 if newDriver.persisted?
+          newDriver.save 
+          count+=1
         end
       
       rescue
