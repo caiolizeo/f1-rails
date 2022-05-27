@@ -1,5 +1,25 @@
 class FormulaOneDriver < ApplicationRecord
 
+  def self.standings
+    resp = Faraday.get('http://ergast.com/api/f1/current/driverStandings.json')
+
+    if resp.status == 200
+      begin
+        resp_drivers = JSON.parse(resp.body)['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
+
+        standings = {}
+
+        resp_drivers.each do |d|
+          standings[d['position']] = FormulaOneDriver.find_by(code: d['Driver']['code'])
+        end
+      rescue
+        return standings['error'] = "error"
+      end
+      return standings
+    end
+  end
+
+
   def self.update
 
     puts ' '
