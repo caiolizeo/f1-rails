@@ -10,7 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_20_211742) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_21_193548) do
+  create_table "bets", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "circuit"
+    t.integer "year"
+    t.string "pole"
+    t.string "first"
+    t.string "second"
+    t.string "third"
+    t.string "fourth"
+    t.string "fifth"
+    t.string "sixth"
+    t.string "seventh"
+    t.string "eighth"
+    t.string "ninth"
+    t.string "tenth"
+    t.integer "result_points"
+    t.boolean "validated"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bets_on_user_id"
+  end
+
+  create_table "f1_drivers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "full_name"
+    t.string "code"
+    t.string "country"
+    t.string "team"
+    t.string "number"
+    t.string "year"
+    t.string "photo_img"
+    t.string "logo_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -23,4 +60,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_211742) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bets", "users"
 end

@@ -1,20 +1,20 @@
 FactoryBot.define do
   factory :bet do
     user { nil }
-    circuit { "MyString" }
-    year { 1 }
-    pole { "MyString" }
-    first { "MyString" }
-    second { "MyString" }
-    third { "MyString" }
-    fourth { "MyString" }
-    fifth { "MyString" }
-    sixth { "MyString" }
-    seventh { "MyString" }
-    eighth { "MyString" }
-    ninth { "MyString" }
-    tenth { "MyString" }
-    result_points { 1 }
+    circuit { 'catalunya' }
+    year { 2022 }
+    pole { 'LEC' }
+    first { 'LEC' }
+    second { 'VER' }
+    third { 'PER' }
+    fourth { 'RUS' }
+    fifth { 'SAI' }
+    sixth { 'NOR' }
+    seventh { 'HAM' }
+    eighth { 'BOT' }
+    ninth { 'OCO' }
+    tenth { 'MAG' }
+    result_points { 0 }
     validated { false }
   end
 end
