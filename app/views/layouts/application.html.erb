@@ -1,53 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>F1 Web</title>
+    <title>F1Betting</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <nav>
-      <div class="nav-main">
-
-        <a href="<%= root_path%>">
-          <div style="display: flex; flex-direction: column;">
-              <%= render inline: Rails.root.join('app/assets/images/f1-white.svg').read %>
-              Web
-          </div>
-        </a>
-
-        <div class="links">
-          <%= link_to 'Home', root_path, class: 'links'%>
-          <%= link_to 'Calendário', circuits_path, class: 'links'%>
-          <%= link_to 'Campeonato de pilotos', standings_path, class: 'links'%>
-
-          <% if user_signed_in? %>
-            <%=link_to current_user.email, profile_index_path, class: 'links' %> - <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-            <%= link_to 'Apostar', new_bet_path, class: 'links' %>
-          <% else %>
-            <%= link_to 'Entrar', new_user_session_path, class: 'links'%>
-          <% end %>
-        </div>
-
-
-      </div>
-    </nav>
-    
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    
-    <main style="margin: 15px;">
-      <%= yield %>
-    </main>
-
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
   </body>
 </html>
