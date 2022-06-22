@@ -1,5 +1,9 @@
 class F1Circuit < ApplicationRecord
 
+  def self.next_race
+    return F1Circuit.find_by("race >= ?", Date.today)
+  end
+
   def self.update
     puts ' '
     puts '======================================'

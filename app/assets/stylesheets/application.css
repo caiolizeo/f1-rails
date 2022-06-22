@@ -13,3 +13,189 @@
  *= require_tree .
  *= require_self
  */
+
+
+ 
+@font-face {
+  font-family: 'Formula1-Regular';
+  src: url('Formula1-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Formula1-Bold';
+  src: url('Formula1-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Formula1-Black';
+  src: url('Formula1-Black.ttf');
+}
+
+@font-face {
+  font-family: 'Formula1-Wide';
+  src: url('Formula1-Wide.ttf');
+}
+
+
+nav {
+  padding: 15px;
+  color: #ffffff;
+  font-family: 'Formula1-Wide';
+  background-color: #e10600;
+  border-radius: 15px;
+
+}
+
+main {
+  font-family: 'Formula1-Regular';
+}
+
+.circuits-table, .standings-table {
+  padding: 5px;
+  border-collapse: collapse; 
+}
+
+.circuits-table td, .standings-table td {
+  padding: 10px;
+}
+
+.tr-1 td {
+  background-color: #ebebeb;
+}
+
+.circuits-table th, .standings-table th{
+  padding-bottom: 5px;
+  border-bottom: 5px solid #e10600;
+}
+
+.nav-main {
+  display: flex; 
+  flex-direction: row;
+
+}
+
+.nav-main a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.links {
+  padding-left: 15px;
+}
+
+.links a{
+  font-family: 'Formula1-Regular';
+
+  color: #ffffff;
+  text-decoration: none;
+
+}
+
+td a {
+  color: #e10600;
+  text-decoration: none;
+}
+
+tbody {
+  font-size: 12px;
+}
+
+.tr-1 td, .tr-0 td  {
+  padding: 30px;
+
+}
+
+th {
+  padding: 25px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+}
+
+.circuit {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+.next-circuit {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+.next-race p {
+  margin-bottom: 0px;
+}
+
+.next-race h1 {
+  margin-top: 0px;
+  display:inline-block; 
+  border-bottom: 5px solid #e10600;
+}
+.details {
+  max-width: 25%;
+}
+
+.details a {
+  color: #e10600;
+  text-decoration: none;
+}
+
+.circuit-box {
+  display:inline-flex; 
+
+}
+
+
+/* DRIVERS */
+
+.driver-box {
+  display: flex;
+}
+
+.logo {
+  width: 160px;
+  height: 90px;
+}
+
+.photo {
+  width: 400px;
+
+}
+
+
+/* BET SHOW */
+.race-container {
+/*    border-left: 5px solid #000000;
+*/
+  margin-left: 35px;
+}
+
+.pole-container {
+
+}
+
+.first-drivers {
+  margin-right: 35px;
+  border-right: 2px solid #000000;
+  border-top-right-radius: 10px;
+  border-top: 2px solid #000000;
+
+
+}
+
+.mini-logo {
+  width: 53.5px;
+  height: 30px;
+}
+
+.mini-photo {
+  width: 120px;
+}
+
+.number {
+  margin: 0px;
+  font-size: 3.5rem;
+  font-weight: bolder;
+}

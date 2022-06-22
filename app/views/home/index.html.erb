@@ -1,1 +1,12 @@
-<h1>test</h1>
+<div class="next-race">
+  <p>Próxima corrida:</p>
+  <h1> Round <%= @next_race.round%> - <%= @next_race.name %></h1>
+
+  <div class="circuit-box">
+    <div>
+      <p><strong>Data: </strong><%= @next_race.race%></p>
+      <p><strong>Local: </strong><%= @next_race.local%> - <%= @next_race.country%></p>
+    </div>
+    <%= image_tag "circuits/#{@next_race.photo_path}", class: 'next-circuit' %>
+  </div>
+</div>
