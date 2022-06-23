@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   resources :circuits, only: [:show]
   resources :standings, only: [:index]
   resources :drivers, only: [:show]
+  resources :profile, only: [:index]
+  resources :bets, only: [:index, :new, :create, :show]
 
 end

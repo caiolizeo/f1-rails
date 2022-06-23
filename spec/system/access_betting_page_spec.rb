@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 describe 'Usuário faz apostas' do
-
   it 'e acessa página de apostas sucesso' do
     user = create(:user)
-
+    circuit = create(:f1_circuit)
+    allow(F1Circuit).to receive(:next_race).and_return(circuit)
+    
     login_as(user)   
     visit root_path
     click_on 'Apostar'
     
+    expect(page).to have_content 'Próxima corrida: São Paulo'
     expect(page).to have_field 'Pole position'
 
     for i in 1..10 do
@@ -27,9 +29,11 @@ describe 'Usuário faz apostas' do
 
   it 'e faz uma aposta' do
     user = create(:user)
+    circuit = create(:f1_circuit)
+    allow(F1Circuit).to receive(:next_race).and_return(circuit)
 
     for i in 1..10 do
-      create(:formula_one_driver, :"fdriver#{i}")
+      create(:f1_driver, :"fdriver#{i}")
     end
 
     login_as(user)   
@@ -57,9 +61,12 @@ describe 'Usuário faz apostas' do
   it 'e tenta fazer uma segunda aposta mas nao consegue' do
     user = create(:user)
     for i in 1..10 do
-      create(:formula_one_driver, :"fdriver#{i}")
+      create(:f1_driver, :"fdriver#{i}")
     end
+    circuit = create(:f1_circuit)
+    allow(F1Circuit).to receive(:next_race).and_return(circuit)
     bet = create(:bet, user: user)
+    
 
     login_as(user)   
     visit root_path
@@ -73,11 +80,12 @@ describe 'Usuário faz apostas' do
     user2 = create(:user, email: 'email2@email.com')
 
     for i in 1..10 do
-      create(:formula_one_driver, :"fdriver#{i}")
+      create(:f1_driver, :"fdriver#{i}")
     end
+    circuit = create(:f1_circuit)
+    allow(F1Circuit).to receive(:next_race).and_return(circuit)
     bet1 = create(:bet, user: user1)
     bet2 = create(:bet, user: user2)
-
 
     login_as(user1)   
     visit bet_path(bet2)

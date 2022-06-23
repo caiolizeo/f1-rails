@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :bet do
     user { nil }
-    circuit { 'catalunya' }
+    circuit { 'interlagos' }
     year { 2022 }
     pole { 'LEC' }
     first { 'LEC' }

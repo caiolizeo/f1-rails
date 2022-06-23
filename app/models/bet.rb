@@ -77,7 +77,7 @@ class Bet < ApplicationRecord
   private
 
   def verify_bet
-    next_race = F1Circuit.where("race >= ?", Date.today).order("race ASC").limit(1)
+    next_race = F1Circuit.next_race
 
     duplicated_bet = Bet.where(user_id: self.user_id, circuit: self.circuit, year: self.year)
     

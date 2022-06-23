@@ -1,0 +1,71 @@
+<%= form_with(model: @bet) do |f| %>
+
+  <h3>Próxima corrida: <%= @next_race.local %></h3>
+
+  <% unless @errors.nil? %>
+    <ul>
+      <% @errors.each do |msg| %>
+        <li><%=msg%></li>
+      <%end%>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= f.label :pole, 'Pole position' %>
+    <%= f.collection_select(:pole, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div>
+    <%= f.label :first, '1ª posição' %>
+    <%= f.collection_select(:first, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+  
+  <div>
+    <%= f.label :second, '2ª posição' %>
+    <%= f.collection_select(:second, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div>
+    <%= f.label :third, '3ª posição' %>
+    <%= f.collection_select(:third, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div>
+    <%= f.label :fourth, '4ª posição' %>
+    <%= f.collection_select(:fourth, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+  
+  <div>
+    <%= f.label :fifth, '5ª posição' %>
+    <%= f.collection_select(:fifth, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div>
+    <%= f.label :sixth, '6ª posição' %>
+    <%= f.collection_select(:sixth, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div>
+    <%= f.label :seventh, '7ª posição' %>
+    <%= f.collection_select(:seventh, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div>
+    <%= f.label :eighth, '8ª posição' %>
+    <%= f.collection_select(:eighth, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div>
+    <%= f.label :ninth, '9ª posição' %>
+    <%= f.collection_select(:ninth, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div>
+    <%= f.label :tenth, '10ª posição' %>
+    <%= f.collection_select(:tenth, @drivers, :code, :full_name, include_blank: true) %>
+  </div>
+
+  <div id="bet-btn">
+    <%= f.submit 'Apostar' %>
+  </div>
+<% end %>
