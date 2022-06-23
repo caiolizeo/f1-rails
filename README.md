@@ -1,24 +1,24 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# F1 Rails
 
-Things you may want to cover:
+## 🖥️ Sobre o projeto:
 
-* Ruby version
+Projeto em Rails 7 criado para visualizar e fazer apostas referentes ao campeonato atual de Formula 1, consumindo APIs do site http://ergast.com/
+<br>
+<br>
 
-* System dependencies
+## ⚙️Configurando o projeto
 
-* Configuration
+```
+ruby bin/setup
+```
 
-* Database creation
+## 🚀 Rodando o projeto
+``` 
+rails s
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 🧪 Executando testes
+``` 
+rspec
+```
