@@ -1,7 +1,7 @@
-<h1>Resumo da Aposta - <%= @bet.circuit %></h1>
+<h1>Resumo da Aposta - <%= @circuit.local %></h1>
 <div style="display: flex;">
 
-  <div class="pole-container">
+  <div class="pole-container" id="pole">
 
     <h2>Pole position</h2>
     <h3><%= @pole.full_name %></h3>
@@ -13,7 +13,7 @@
 
   </div>
 
-  <div class="race-container">
+  <div class="race-container" id="race">
     <h2>Corrida</h2>
     <div style="display: flex;">
       <% @first_drivers.each_with_index do |driver, position| %>

@@ -19,7 +19,7 @@ class BetsController < ApplicationController
     b = Bet.new(bet_params)
     b.user = current_user
     b.year = F1Circuit.next_race.year
-    b.circuit = F1Circuit.next_race 
+    b.circuit = F1Circuit.next_race.code
     if b.save
       redirect_to b, notice: 'Aposta realizada com sucesso' 
     else
@@ -33,6 +33,7 @@ class BetsController < ApplicationController
 
   def show
     @bet = Bet.find(params[:id])
+    @circuit = F1Circuit.find_by(code: @bet.circuit)
     @pole = F1Driver.find_by(code: @bet.pole, year: @bet.year)
     codes = [@bet.first, @bet.second,  @bet.third, @bet.fourth, @bet.fifth, @bet.sixth, @bet.seventh, @bet.eighth, @bet.ninth, @bet.tenth]
     @last_drivers = []

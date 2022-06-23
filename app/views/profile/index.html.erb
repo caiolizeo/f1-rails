@@ -1,0 +1,36 @@
+<h1>Minhas Apostas</h1>
+<% if @bets.empty? %>
+  <h3>Você não possui nenhuma aposta</h3>
+<% else %>
+  <table>
+    <thead>
+      <th>ID da aposta</th>
+      <th>Circuito</th>
+      <th>Temporada</th>
+      <th>Pole</th>
+      <th>Vencedor</th>
+      <th>Pontuação</th>
+      <th></th>
+    </thead>
+
+    <tbody>
+      <% @bets.each do |b| %>
+        <tr id="bet-<%= b.id %>">
+          <td><%= b.id %></td>
+          <td><%= b.circuit %></td>
+          <td><%= b.year %></td>
+          <td><%= b.pole %></td>
+          <td><%= b.first %></td>
+
+          <% if b.validated? %>
+            <td><%= b.result_points %> pontos</td>
+          <% else %>
+            <td>Aguardando resultados</td>
+          <% end %>
+
+          <td><%= link_to 'Detalhes', b %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
