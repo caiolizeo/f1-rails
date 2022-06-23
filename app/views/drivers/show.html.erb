@@ -1,0 +1,10 @@
+<% if @driver.nil? %>
+  <h1>Erro 404 - Página não encontrada</h1>
+<% else %>
+  <div class="content">
+    <div class="driver-box">
+      <%= image_tag "drivers/#{@driver.logo_img}", class: 'logo' %>
+      <%= image_tag "drivers/#{@driver.photo_img}", class: 'photo' %>
+    </div>
+  </div>
+<% end %>

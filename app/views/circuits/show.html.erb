@@ -1,0 +1,13 @@
+<% if @circuit.nil? %>
+  <h1>Erro 404 - Página não encontrada</h1>
+<% else %>
+  <div class="content">
+    <div class="details">
+      <h1><%= @circuit.name %></h1>
+      Local: <%= @circuit.local %> - <%=@circuit.country%>
+      <br><br><br>
+      <%= link_to 'Voltar', circuit_path%>
+    </div>
+    <%= image_tag "circuits/#{@circuit.photo_path}", class: 'circuit' %>
+  </div>
+<% end %>

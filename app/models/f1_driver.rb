@@ -1,24 +1,8 @@
 class F1Driver < ApplicationRecord
 
   def self.standings
-    resp = Faraday.get('http://ergast.com/api/f1/current/driverStandings.json')
-
-    if resp.status == 200
-      begin
-        resp_drivers = JSON.parse(resp.body)['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
-
-        standings = {}
-
-        resp_drivers.each do |d|
-          standings[d['position']] = F1Driver.find_by(code: d['Driver']['code'])
-        end
-      rescue
-        return standings['error'] = "error"
-      end
-      return standings
-    end
+    return F1Driver.where(year: Date.today.year).order(position: :asc)
   end
-
 
   def self.update
     puts ' '
@@ -50,6 +34,9 @@ class F1Driver < ApplicationRecord
           newDriver.year = season
           newDriver.photo_img = "#{season}/#{driver['Driver']['driverId']}_photo.png"
           newDriver.logo_img = "#{season}/#{driver['Driver']['driverId']}_logo.png"
+          newDriver.position = driver['position']
+          newDriver.points = driver['points']
+          newDriver.wins = driver['wins']
           
           newDriver.save 
           count+=1

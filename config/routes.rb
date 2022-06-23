@@ -3,9 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   resources :calendar, only: [:index]
-  resources :circuit, only: [:show]
-
+  resources :circuits, only: [:show]
   resources :standings, only: [:index]
-
+  resources :drivers, only: [:show]
 
 end

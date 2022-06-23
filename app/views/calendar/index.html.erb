@@ -12,7 +12,7 @@
 
     <tbody>
       <% @circuits.each do |c|%>
-          <tr onclick="<%= circuit_path(c.id) %>" style="cursor: pointer;" class="tr-<%= c.round.to_i%2 %>">
+          <tr class="tr-<%= c.round.to_i%2 %>">
 
             <td><%=c.round%></td>
             <td><%=c.name%></td>
