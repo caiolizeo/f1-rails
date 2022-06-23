@@ -1,9 +1,9 @@
 class CircuitsController < ApplicationController
-  def index
-    @circuits = FormulaOneCircuit.all
-  end
-
   def show
-    @circuit = FormulaOneCircuit.find(params[:id])
+    begin
+      @circuit = F1Circuit.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      @circuit = nil
+    end
   end
 end

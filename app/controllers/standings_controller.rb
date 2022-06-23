@@ -1,5 +1,5 @@
 class StandingsController < ApplicationController
   def index
-    @drivers = Driver.standings
+    @drivers = F1Driver.standings
   end
 end

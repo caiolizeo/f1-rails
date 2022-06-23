@@ -4,10 +4,23 @@
 
   <div class="circuit-box">
     <div>
-      <p><strong>Data: </strong><%= @next_race.date%></p>
-      <p><strong>Local: </strong><%= @next_race.local%> - <%= @next_race.country%></p>
-      <p><strong>Horário: </strong><%= @next_race.time%></p>
+      <% if @sprint.nil?%>
+        <p><strong>TL1: </strong><%= @fp1.strftime("%d/%m/%Y") %> - <%= @fp1.strftime("%H:%M") %>h</p>
+        <p><strong>TL2: </strong><%= @fp2.strftime("%d/%m/%Y") %> - <%= @fp2.strftime("%H:%M") %>h</p>
+        <p><strong>TL3: </strong><%= @fp3.strftime("%d/%m/%Y") %> - <%= @fp3.strftime("%H:%M") %>h</p>
+        <p><strong>Classificação: </strong><%= @qualifying.strftime("%d/%m/%Y") %> - <%= @qualifying.strftime("%H:%M") %>h</p>
+      <% elsif @fp3.nil? %>
+        <p><strong>TL1: </strong><%= @fp1.strftime("%d/%m/%Y") %> - <%= @fp1.strftime("%H:%M") %>h</p>
+        <p><strong>Classificação: </strong><%= @qualifying.strftime("%d/%m/%Y") %> - <%= @qualifying.strftime("%H:%M") %>h</p>
+        <p><strong>TL2: </strong><%= @fp2.strftime("%d/%m/%Y") %> - <%= @fp2.strftime("%H:%M") %>h</p>
+        <p><strong>Sprint: </strong><%= @race.strftime("%d/%m/%Y") %> - <%= @race.strftime("%H:%M") %>h</p>
+      <% end %>
+      
+      <p><strong>Corrida: </strong><%= @race.strftime("%d/%m/%Y") %> - <%= @race.strftime("%H:%M") %>h</p>
+    
+      <p><strong>Local: </strong><%= @next_race.local %> - <%= @next_race.country %></p>
     </div>
-    <%= image_tag "circuits/2022/#{@next_race.id}.png", class: 'next-circuit' %>
+
+    <%= image_tag "circuits/#{@next_race.photo_path}", class: 'next-circuit' %>
   </div>
 </div>

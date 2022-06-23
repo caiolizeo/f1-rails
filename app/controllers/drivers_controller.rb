@@ -1,5 +1,9 @@
 class DriversController < ApplicationController
   def show
-    @driver = Driver.find(params[:id])
+    begin
+      @driver = F1Driver.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      @driver = nil
+    end
   end
 end

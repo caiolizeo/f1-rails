@@ -1,6 +1,6 @@
 <%= form_with(model: @bet) do |f| %>
 
-  <h3>Próxima corrida: <%= @next_race.circuit %></h3>
+  <h3>Próxima corrida: <%= @next_race.local %></h3>
 
   <% unless @errors.nil? %>
     <ul>
@@ -11,8 +11,8 @@
   <% end %>
 
   <div>
-    <%= f.label :pole_position, 'Pole position' %>
-    <%= f.collection_select(:pole_position, @drivers, :code, :full_name, include_blank: true) %>
+    <%= f.label :pole, 'Pole position' %>
+    <%= f.collection_select(:pole, @drivers, :code, :full_name, include_blank: true) %>
   </div>
 
   <div>

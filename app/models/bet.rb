@@ -7,6 +7,8 @@ class Bet < ApplicationRecord
     resp = Faraday.get('http://ergast.com/api/f1/current/last/results.json')
     circuit_id = JSON.parse(resp.body)['MRData']['RaceTable']['Races'][0]['Circuit']['circuitId']
     circuit_season = JSON.parse(resp.body)['MRData']['RaceTable']['season']
+    puts circuit_season
+    puts circuit_id
     bets = Bet.where(year: circuit_season, circuit: circuit_id, validated: 'invalidated')
 
     puts '=== NENHUMA APOSTA PARA ATUALIZAR ===' if bets.empty?
@@ -15,12 +17,8 @@ class Bet < ApplicationRecord
     q_resp = Faraday.get('http://ergast.com/api/f1/current/last/qualifying.json')
     pole = JSON.parse(q_resp.body)['MRData']['RaceTable']['Races'][0]['QualifyingResults'][0]['Driver']['code']
 
-    dvr = FormulaOneDriver.where(year: circuit_season)
+    dvr = F1Driver.where(year: circuit_season)
     drivers = {}
-
-    dvr.each do |d|
-      drivers[d.code] = nil
-    end
 
     resp_result = JSON.parse(resp.body)['MRData']['RaceTable']['Races'][0]['Results']
 
@@ -40,7 +38,7 @@ class Bet < ApplicationRecord
       puts "=== VALIDANDO APOSTA ID: #{bet.id} ==="
       points = 0
 
-      points += 20 if pole == bet.pole_position
+      points += 20 if pole == bet.pole
 
       points += calculate_points((1 - drivers[bet.first].to_i).abs)
       points += calculate_points((2 - drivers[bet.second].to_i).abs)
@@ -60,7 +58,7 @@ class Bet < ApplicationRecord
     
     return nil
   end
-  
+
   def self.calculate_points(position)
     return 20 if position == 0
     return 18 if position == 1
@@ -75,25 +73,26 @@ class Bet < ApplicationRecord
     return 1 if position == 10
     return 0
   end
-  
+
   private
 
   def verify_bet
+    next_race = F1Circuit.next_race
+
     duplicated_bet = Bet.where(user_id: self.user_id, circuit: self.circuit, year: self.year)
     
     errors.add(:base, 'Você não pode fazer outra aposta para essa corrida!') unless duplicated_bet.empty?
     
-    errors.add(:base, "Corrida ou ano inválido!") unless Circuit.next_race.id == self.circuit || Circuit.next_race.date.last(4) == self.year
+    errors.add(:base, "Corrida ou ano inválido!") unless next_race.code == self.circuit || next_race.year == self.year
     
     driver_codes = [self.first, self.second, self.third, self.fourth, self.fifth, self.sixth, self.seventh, self.eighth, self.ninth, self.tenth]
     errors.add(:base, "Não são permitidos pilotos duplicados ou em branco!") if driver_codes.detect{ |e| driver_codes.count(e) > 1 } != nil
    
 
     driver_codes.each do |code|
-      driver = FormulaOneDriver.find_by(code: code, year: Circuit.next_race.date.last(4))
+      driver = F1Driver.find_by(code: code, year: next_race.year)
       errors.add(:base, "Um ou mais pilotos inválidos!") if driver == nil
     end
   end
-
 
 end

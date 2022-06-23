@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :bet do
     user { nil }
-    circuit { 'catalunya' }
+    circuit { 'interlagos' }
     year { 2022 }
-    pole_position { 'LEC' }
+    pole { 'LEC' }
     first { 'LEC' }
     second { 'VER' }
     third { 'PER' }
@@ -14,5 +14,7 @@ FactoryBot.define do
     eighth { 'BOT' }
     ninth { 'OCO' }
     tenth { 'MAG' }
+    result_points { 0 }
+    validated { false }
   end
 end

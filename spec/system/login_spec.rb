@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Usuário faz login' do
   it 'Com sucesso' do
     user = create(:user)
+    create(:f1_circuit)
 
     visit root_path
     click_on 'Entrar'
@@ -12,11 +13,11 @@ describe 'Usuário faz login' do
 
     expect(current_path).to eq root_path
     expect(page).not_to have_content 'Entrar'
-    expect(page).to have_content 'Login efetuado com sucesso!'
   end
 
   it 'email ou senha incorreta' do
     user = create(:user)
+    create(:f1_circuit)
 
     visit root_path
     click_on 'Entrar'
@@ -25,11 +26,12 @@ describe 'Usuário faz login' do
     click_on 'Login'
 
     expect(current_path).not_to eq root_path
-    expect(page).to have_content 'E-mail ou senha inválida'
+    expect(page).to have_content 'E-mail ou senha inválidos'
   end
 
   it 'faz logout' do
     user = create(:user)
+    create(:f1_circuit)
 
     visit root_path
     click_on 'Entrar'

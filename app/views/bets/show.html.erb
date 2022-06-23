@@ -1,10 +1,10 @@
-<h1>Resumo da Aposta - <%= @bet.circuit %></h1>
+<h1>Resumo da Aposta - <%= @circuit.local %></h1>
 <div style="display: flex;">
 
-  <div class="pole-container">
+  <div class="pole-container" id="pole">
 
     <h2>Pole position</h2>
-    <h3><%= @pole.name %></h3>
+    <h3><%= @pole.full_name %></h3>
 
     <div style="display: flex;">
       <%= image_tag "drivers/#{@pole.logo_img}", class: 'logo' %>
@@ -13,7 +13,7 @@
 
   </div>
 
-  <div class="race-container">
+  <div class="race-container" id="race">
     <h2>Corrida</h2>
     <div style="display: flex;">
       <% @first_drivers.each_with_index do |driver, position| %>
@@ -25,7 +25,7 @@
           </div>
 
           <div style="display: flex;">
-            <p class="number"><%= position + 1 %></p> <p><%= driver.name %></p>
+            <p class="number"><%= position + 1 %></p> <p><%= driver.full_name %></p>
           </div>
               
         </div>
@@ -38,7 +38,7 @@
         <% @last_drivers.each_with_index do |driver, position| %>
           <tr>
             <td><%= position + 4 %></td>
-            <td><%= image_tag "drivers/#{driver.logo_img}", class: 'mini-logo' %> <%= driver.name%></td>
+            <td><%= image_tag "drivers/#{driver.logo_img}", class: 'mini-logo' %> <%= driver.full_name%></td>
           </tr>
         <% end %>
       

@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe 'Usuário se cadastra' do
   it 'Com sucesso' do
-    visit root_path
+    create(:f1_circuit)
 
+    visit root_path
     click_on 'Entrar'
     click_on 'Inscrever-se'
     save_page
@@ -18,8 +19,9 @@ describe 'Usuário se cadastra' do
   end
 
   it 'senha com menos de 6 caracteres' do
-    visit root_path
+    create(:f1_circuit)
 
+    visit root_path
     click_on 'Entrar'
     click_on 'Inscrever-se'
     save_page
@@ -34,8 +36,9 @@ describe 'Usuário se cadastra' do
 
 
   it 'confirmação de senha incorreta' do
-    visit root_path
+    create(:f1_circuit)
 
+    visit root_path
     click_on 'Entrar'
     click_on 'Inscrever-se'
     save_page
