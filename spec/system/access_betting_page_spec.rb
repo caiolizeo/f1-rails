@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário faz apostas' do
-  it 'e acessa página de apostas sucesso' do
+  it 'e acessa página de apostas com sucesso' do
     user = create(:user)
     circuit = create(:f1_circuit)
     allow(F1Circuit).to receive(:next_race).and_return(circuit)
@@ -27,7 +27,7 @@ describe 'Usuário faz apostas' do
 
   end
 
-  it 'e faz uma aposta' do
+  it 'com sucesso' do
     user = create(:user)
     circuit = create(:f1_circuit)
     allow(F1Circuit).to receive(:next_race).and_return(circuit)
@@ -56,7 +56,36 @@ describe 'Usuário faz apostas' do
     end
 
     expect(page).to have_content 'Aposta realizada com sucesso'
+    expect(page).to have_css('h3', text: 'O resultado da aposta estará disponível após a corrida!')
+
     expect(current_path).to eq bet_path(1)
+  end
+  
+  it 'e visualiza a pontuação da sua aposta' do
+    user = create(:user)
+    for i in 1..10 do
+      create(:f1_driver, :"fdriver#{i}")
+    end
+    circuit = create(:f1_circuit)
+    allow(F1Circuit).to receive(:next_race).and_return(circuit)
+    bet = create(:bet, user: user)
+    race = File.read(Rails.root.join('spec/support/race.json'))
+    quali = File.read(Rails.root.join('spec/support/qualifying.json'))
+    resp1 = double('faraday_response', body: race, status: 200)
+    resp2 = double('faraday_response', body: quali, status: 200)
+    allow(Faraday).to receive(:get).with('http://ergast.com/api/f1/current/last/results.json').and_return(resp1)
+    allow(Faraday).to receive(:get).with('http://ergast.com/api/f1/current/last/qualifying.json').and_return(resp2)
+    Bet.update_all
+
+    login_as(user)   
+    visit root_path
+    click_on user.email
+    within("tr#bet-#{bet.id}") do
+      click_on 'Detalhes'
+    end
+    
+    expect(page).to have_css('h3', text: 'Resultado da aposta: 116 pontos')
+
   end
 
   it 'e tenta fazer uma aposta com o mesmo piloto em mais de uma posição' do
@@ -117,7 +146,7 @@ describe 'Usuário faz apostas' do
     within('div#bet-btn') do
       click_on 'Apostar'
     end
-    
+
     expect(page).to have_content 'Aposta inválida'
     expect(page).to have_content 'Não são permitidos pilotos duplicados ou em branco'
     expect(current_path).to eq bets_path

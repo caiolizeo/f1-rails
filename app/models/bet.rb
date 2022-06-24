@@ -1,14 +1,13 @@
 class Bet < ApplicationRecord
   belongs_to :user
-  before_validation :verify_bet
+  before_validation :verify_bet, on: :create
   enum validated: { validated: true, invalidated: false }
 
   def self.update_all
     resp = Faraday.get('http://ergast.com/api/f1/current/last/results.json')
     circuit_id = JSON.parse(resp.body)['MRData']['RaceTable']['Races'][0]['Circuit']['circuitId']
     circuit_season = JSON.parse(resp.body)['MRData']['RaceTable']['season']
-    puts circuit_season
-    puts circuit_id
+
     bets = Bet.where(year: circuit_season, circuit: circuit_id, validated: 'invalidated')
 
     puts '=== NENHUMA APOSTA PARA ATUALIZAR ===' if bets.empty?
@@ -26,16 +25,7 @@ class Bet < ApplicationRecord
       drivers[r['Driver']['code']] = r['position']
     end
 
-    puts ' '
-    puts "=== VALIDANDO #{bets.length} APOSTA ===" if bets.length == 1
-    puts "=== VALIDANDO #{bets.length} APOSTAS ===" if bets.length > 1
-    puts ' '
-    puts "Circuito: #{circuit_id}"
-    puts "Temporada: #{circuit_season}"
-    puts ' '
-
     bets.each do |bet|
-      puts "=== VALIDANDO APOSTA ID: #{bet.id} ==="
       points = 0
 
       points += 20 if pole == bet.pole

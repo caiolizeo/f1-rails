@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_23_005545) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_24_120938) do
   create_table "bets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "circuit"
@@ -27,9 +27,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_005545) do
     t.string "ninth"
     t.string "tenth"
     t.integer "result_points"
-    t.boolean "validated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "validated", default: false, null: false
     t.index ["user_id"], name: "index_bets_on_user_id"
   end
 
