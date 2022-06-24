@@ -7,7 +7,6 @@ describe 'Usuário se cadastra' do
     visit root_path
     click_on 'Entrar'
     click_on 'Inscrever-se'
-    save_page
     fill_in 'E-mail', with: 'email@email.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'
@@ -24,7 +23,6 @@ describe 'Usuário se cadastra' do
     visit root_path
     click_on 'Entrar'
     click_on 'Inscrever-se'
-    save_page
     fill_in 'E-mail', with: 'email@email.com'
     fill_in 'Senha', with: '12345'
     fill_in 'Confirme sua senha', with: '12345'
@@ -41,7 +39,6 @@ describe 'Usuário se cadastra' do
     visit root_path
     click_on 'Entrar'
     click_on 'Inscrever-se'
-    save_page
     fill_in 'E-mail', with: 'email@email.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '12345'

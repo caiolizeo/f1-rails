@@ -56,6 +56,71 @@ describe 'Usuário faz apostas' do
     end
 
     expect(page).to have_content 'Aposta realizada com sucesso'
+    expect(current_path).to eq bet_path(1)
+  end
+
+  it 'e tenta fazer uma aposta com o mesmo piloto em mais de uma posição' do
+    user = create(:user)
+    circuit = create(:f1_circuit)
+    allow(F1Circuit).to receive(:next_race).and_return(circuit)
+
+    for i in 1..10 do
+      create(:f1_driver, :"fdriver#{i}")
+    end
+
+    login_as(user)   
+    visit root_path
+    click_on 'Apostar'
+
+    select 'Charles Leclerc', from: 'Pole position'
+    select 'Charles Leclerc', from: '1ª posição'
+    select 'Charles Leclerc', from: '2ª posição'
+    select 'George Russell', from: '3ª posição'
+    select 'Carlos Sainz', from: '4ª posição'
+    select 'Lewis Hamilton', from: '5ª posição'
+    select 'Lando Norris', from: '6ª posição'
+    select 'Valtteri Bottas', from: '7ª posição'
+    select 'Esteban Ocon', from: '8ª posição'
+    select 'Kevin Magnussen', from: '9ª posição'
+    select 'Max Verstappen', from: '10ª posição'
+    within('div#bet-btn') do
+      click_on 'Apostar'
+    end
+    expect(page).to have_content 'Aposta inválida'
+    expect(page).to have_content 'Não são permitidos pilotos duplicados ou em branco'
+    expect(current_path).to eq bets_path
+  end
+
+  it 'e tenta fazer uma aposta sem selecionar todos os pilotos' do
+    user = create(:user)
+    circuit = create(:f1_circuit)
+    allow(F1Circuit).to receive(:next_race).and_return(circuit)
+
+    for i in 1..10 do
+      create(:f1_driver, :"fdriver#{i}")
+    end
+
+    login_as(user)   
+    visit root_path
+    click_on 'Apostar'
+
+    select 'Charles Leclerc', from: '1ª posição'
+    select 'Sergio Pérez', from: '2ª posição'
+    select 'George Russell', from: '3ª posição'
+    select 'Carlos Sainz', from: '4ª posição'
+    select 'Lewis Hamilton', from: '5ª posição'
+    select 'Lando Norris', from: '6ª posição'
+    select 'Valtteri Bottas', from: '7ª posição'
+    select 'Esteban Ocon', from: '8ª posição'
+    select 'Kevin Magnussen', from: '9ª posição'
+    select 'Max Verstappen', from: '10ª posição'
+    within('div#bet-btn') do
+      click_on 'Apostar'
+    end
+    
+    expect(page).to have_content 'Aposta inválida'
+    expect(page).to have_content 'Não são permitidos pilotos duplicados ou em branco'
+    expect(current_path).to eq bets_path
   end
 
   it 'e tenta fazer uma segunda aposta mas nao consegue' do

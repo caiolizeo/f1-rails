@@ -5,6 +5,9 @@ describe 'usuário acessa sua página de perfil' do
     user = create(:user)
     circuit = create(:f1_circuit)
     allow(F1Circuit).to receive(:next_race).and_return(circuit)
+    for i in 1..10 do
+      create(:f1_driver, :"fdriver#{i}")
+    end
     bet1 = create(:bet, user: user)
     bet2 = create(:bet, user: user, circuit: 'catalunya', result_points: 120, pole: 'VER', validated: true)
 
@@ -40,6 +43,9 @@ describe 'usuário acessa sua página de perfil' do
     end
     circuit = create(:f1_circuit)
     allow(F1Circuit).to receive(:next_race).and_return(circuit)
+    for i in 1..10 do
+      create(:f1_driver, :"fdriver#{i}")
+    end
     bet = create(:bet, user: user, pole: 'VER', result_points: 116, validated: true)
 
     login_as(user)
@@ -87,6 +93,9 @@ describe 'usuário acessa sua página de perfil' do
     user = create(:user)
     circuit = create(:f1_circuit)
     allow(F1Circuit).to receive(:next_race).and_return(circuit)
+    for i in 1..10 do
+      create(:f1_driver, :"fdriver#{i}")
+    end
     bet = create(:bet, user: user)
 
     visit bet_path(bet.id)

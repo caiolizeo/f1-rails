@@ -23,7 +23,9 @@ class BetsController < ApplicationController
     if b.save
       redirect_to b, notice: 'Aposta realizada com sucesso' 
     else
-      @next_race = Circuit.next_race
+      @next_race = F1Circuit.next_race
+      @drivers = F1Driver.where("year = '#{@next_race.year}'")
+      @next_race = F1Circuit.next_race
       @errors = b.errors.full_messages
       flash.now[:alert] = 'Aposta inválida'
       render 'new'

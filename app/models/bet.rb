@@ -1,6 +1,6 @@
 class Bet < ApplicationRecord
   belongs_to :user
-  before_create :verify_bet
+  before_validation :verify_bet
   enum validated: { validated: true, invalidated: false }
 
   def self.update_all
@@ -81,17 +81,16 @@ class Bet < ApplicationRecord
 
     duplicated_bet = Bet.where(user_id: self.user_id, circuit: self.circuit, year: self.year)
     
-    errors.add(:base, 'Você não pode fazer outra aposta para essa corrida!') unless duplicated_bet.empty?
+    errors.add(:base, 'Você não pode fazer outra aposta para essa corrida') unless duplicated_bet.empty?
     
-    errors.add(:base, "Corrida ou ano inválido!") unless next_race.code == self.circuit || next_race.year == self.year
+    errors.add(:base, "Corrida ou ano inválido") unless next_race.code == self.circuit || next_race.year == self.year
     
     driver_codes = [self.first, self.second, self.third, self.fourth, self.fifth, self.sixth, self.seventh, self.eighth, self.ninth, self.tenth]
-    errors.add(:base, "Não são permitidos pilotos duplicados ou em branco!") if driver_codes.detect{ |e| driver_codes.count(e) > 1 } != nil
+    errors.add(:base, "Não são permitidos pilotos duplicados ou em branco") if driver_codes.detect{ |e| driver_codes.count(e) > 1 } != nil || self.pole == ''
    
-
     driver_codes.each do |code|
       driver = F1Driver.find_by(code: code, year: next_race.year)
-      errors.add(:base, "Um ou mais pilotos inválidos!") if driver == nil
+      errors.add(:base, "Um ou mais pilotos inválidos") if driver == nil
     end
   end
 
