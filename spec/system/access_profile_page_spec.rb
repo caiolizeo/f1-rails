@@ -89,17 +89,12 @@ describe 'usuário acessa sua página de perfil' do
     expect(page).to have_css('h3', text: 'Você não possui nenhuma aposta')
   end
 
-  it 'e não consegue acessar a página de outro usuário' do
-    user = create(:user)
+  it 'e não está logado' do
     circuit = create(:f1_circuit)
     allow(F1Circuit).to receive(:next_race).and_return(circuit)
-    for i in 1..10 do
-      create(:f1_driver, :"fdriver#{i}")
-    end
-    bet = create(:bet, user: user)
 
-    visit bet_path(bet.id)
+    visit profile_index_path
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq new_user_session_path
   end
 end
