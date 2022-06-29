@@ -44,6 +44,17 @@ class Bet < ApplicationRecord
       bet.result_points = points 
       bet.validated!
       bet.save
+
+      bet_point = BetPoint.find_by(year: bet.year, user: bet.user)
+
+      if bet_point.nil?
+        BetPoint.create(year: bet.year, user: bet.user, points: bet.result_points)
+
+      else
+        bet_point.points += bet.result_points
+        bet_point.save
+      end
+
     end
     
     return nil

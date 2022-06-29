@@ -1,19 +1,20 @@
 <% unless @bets.empty? %>
+
+  <h1> Temporada: <%= @year %></h1>
+
   <table class="<%= controller_name %>-table">
 
     <thead>
       <th>Posição</th>
       <th>Pontuação</th>
-      <th>ID da aposta</th>
       <th>Usuário</th>
     </thead>
 
     <tbody>
       <% @bets.each do |key, value|%>
-          <tr id="bet-<%= value.id %>">
+          <tr id="bt-<%= value.id %>">
             <td><%= key %></td>
-            <td><%=value.result_points%> pts</td>
-            <td>ID: <%=value.id%></td>
+            <td><%=value.points%> pts</td>
             <td><%=value.user.email%></td>
           </tr>
       <% end %>
