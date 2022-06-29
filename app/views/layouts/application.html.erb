@@ -25,6 +25,7 @@
           <%= link_to 'Home', root_path, class: 'links'%>
           <%= link_to 'Calendário', calendar_index_path, class: 'links'%>
           <%= link_to 'Campeonato de pilotos', standings_path, class: 'links'%>
+          <%= link_to 'Ranking', rankings_path, class: 'links'%>
 
           <% if user_signed_in? %>
             <%=link_to current_user.email, profile_index_path, class: 'links' %> - <%= button_to 'Sair', destroy_user_session_path, method: :delete %>

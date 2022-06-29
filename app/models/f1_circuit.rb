@@ -4,6 +4,10 @@ class F1Circuit < ApplicationRecord
     return F1Circuit.find_by("race >= ?", Date.today)
   end
 
+  def self.last_race
+    return F1Circuit.where("race <= ? and year == ?", Date.today, Date.today.year).order(race: :desc)[0]
+  end
+
   def self.update
     puts ' '
     puts '======================================'

@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   resources :drivers, only: [:show]
   resources :profile, only: [:index]
   resources :bets, only: [:index, :new, :create, :show]
+  resources :rankings, only: [:index] do
+    get 'last_race', on: :collection
+    get 'season', on: :collection
+  end
 
 end
