@@ -54,7 +54,7 @@ gem 'faraday'
 gem 'devise'
 gem 'rails-i18n', '~> 7.0', '>= 7.0.3'
 gem 'devise-i18n'
-
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
 
 group :development, :test do
